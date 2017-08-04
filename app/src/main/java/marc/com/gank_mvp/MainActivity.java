@@ -1,29 +1,26 @@
 package marc.com.gank_mvp;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.util.List;
-
+import android.util.SparseArray;
+import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import marc.com.gank_mvp.adapter.GirlAdapter;
-import marc.com.gank_mvp.model.Girl;
-import marc.com.gank_mvp.presenter.IListPresenter;
-import marc.com.gank_mvp.presenter.ListPresenterImpl;
-import marc.com.gank_mvp.view.IListView;
+import marc.com.gank_mvp.ui.GirlFragment;
 
-public class MainActivity extends AppCompatActivity implements IListView {
-
-	@BindView(R.id.recycle_view)
-	RecyclerView mRecycleView;
-	private IListPresenter mPresenter;
-	private GirlAdapter mGirlAdapter;
+public class MainActivity extends AppCompatActivity {
+	@BindView(R.id.bottom_view)
+	BottomNavigationView mBottomView;
+	private GirlFragment mGirlFragment;
+	private FragmentManager mFragmentManager;
+	private FragmentTransaction mTransaction;
+	private SparseArray<Fragment> mFragments;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +29,36 @@ public class MainActivity extends AppCompatActivity implements IListView {
 		ButterKnife.bind(this);
 
 		init();
-
-		mPresenter = new ListPresenterImpl(this);
-		mPresenter.setData("10-1");
 	}
 
 	private void init() {
-		StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-		mRecycleView.setLayoutManager(manager);
-		mGirlAdapter = new GirlAdapter(MainActivity.this,null,R.layout.item_girl);
-		mRecycleView.setAdapter(mGirlAdapter);
+		mFragmentManager = getSupportFragmentManager();
+		mFragments = new SparseArray<>();
+
+		mBottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+			@Override
+			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+				switch (item.getItemId()){
+					case R.id.menu_girl:
+						mGirlFragment = (GirlFragment) mFragments.get(R.id.menu_girl);
+						if(mGirlFragment == null){
+							mGirlFragment = GirlFragment.newInstance();
+							mFragments.put(R.id.menu_girl,mGirlFragment);
+						}
+						changeFragment(mGirlFragment);
+						break;
+				}
+				return true;
+			}
+
+
+		});
+	}
+	private void changeFragment(Fragment fragment) {
+		mTransaction = mFragmentManager.beginTransaction();
+		mTransaction.replace(R.id.frame,fragment);
+		mTransaction.commit();
 	}
 
-	@Override
-	public void showList(List list) {
-		mGirlAdapter.setmDatas(list);
-		mGirlAdapter.notifyDataSetChanged();
-	}
+
 }
