@@ -1,7 +1,7 @@
 package marc.com.gank_mvp.net;
 
 import io.reactivex.Observable;
-import marc.com.gank_mvp.model.Girl;
+import marc.com.gank_mvp.bean.Girl;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 

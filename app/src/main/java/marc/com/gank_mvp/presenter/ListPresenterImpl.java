@@ -1,15 +1,11 @@
 package marc.com.gank_mvp.presenter;
 
-import android.util.Log;
-
-import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import marc.com.gank_mvp.model.Girl;
+import marc.com.gank_mvp.bean.Girl;
 import marc.com.gank_mvp.util.Service;
 import marc.com.gank_mvp.view.IListView;
 

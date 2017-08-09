@@ -1,4 +1,4 @@
-package marc.com.gank_mvp.model;
+package marc.com.gank_mvp.bean;
 
 import java.util.List;
 
