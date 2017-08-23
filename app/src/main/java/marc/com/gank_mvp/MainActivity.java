@@ -8,16 +8,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import marc.com.gank_mvp.ui.GirlFragment;
+import marc.com.gank_mvp.ui.HotFragment;
 
 public class MainActivity extends AppCompatActivity {
 	@BindView(R.id.bottom_view)
 	BottomNavigationView mBottomView;
 	private GirlFragment mGirlFragment;
+	private HotFragment mHotFragment;
 	private FragmentManager mFragmentManager;
 	private FragmentTransaction mTransaction;
 	private SparseArray<Fragment> mFragments;
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 		mFragmentManager = getSupportFragmentManager();
 		mFragments = new SparseArray<>();
 
+		mHotFragment = HotFragment.newInstance();
+		changeFragment(mHotFragment);
+
 		mBottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -46,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
 							mFragments.put(R.id.menu_girl,mGirlFragment);
 						}
 						changeFragment(mGirlFragment);
+						break;
+					case R.id.menu_hot:
+						mHotFragment = (HotFragment)mFragments.get(R.id.menu_hot);
+						if(mHotFragment == null){
+							mHotFragment = HotFragment.newInstance();
+							mFragments.put(R.id.menu_hot,mHotFragment);
+						}
+						changeFragment(mHotFragment);
 						break;
 				}
 				return true;

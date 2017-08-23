@@ -1,5 +1,8 @@
 package marc.com.gank_mvp.model;
 
+import java.util.List;
+
+import marc.com.gank_mvp.bean.Hot;
 import marc.com.gank_mvp.contract.HotContract;
 
 /**
@@ -10,5 +13,18 @@ import marc.com.gank_mvp.contract.HotContract;
  * Description:
  * Email:wangchengda1990@gmail.com
  **/
-public class HotModel implements HotContract.Model {
+public class HotModel<T> implements HotContract.Model {
+	private List<T> list;
+
+
+
+	@Override
+	public void setList(List list) {
+		this.list = list;
+	}
+
+	@Override
+	public List<T> getList() {
+		return list;
+	}
 }

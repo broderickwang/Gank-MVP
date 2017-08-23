@@ -2,6 +2,7 @@ package marc.com.gank_mvp.net;
 
 import io.reactivex.Observable;
 import marc.com.gank_mvp.bean.Girl;
+import marc.com.gank_mvp.bean.Hot;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -17,4 +18,7 @@ public interface Api {
 
 	@GET("api/data/福利/{pagenumber}/{pagesize}")
 	Observable<Girl> getGirl(@Path("pagenumber")String number,@Path("pagesize")String size);
+
+	@GET("api/data/all/{size}/2")
+	Observable<Hot> getHot(@Path("size")String size);
 }

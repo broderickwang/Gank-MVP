@@ -3,4 +3,11 @@
     <color name="colorPrimary">#67abef</color>
     <color name="colorPrimaryDark">#2888e9</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="color_card_bg">#FFFFFF</color>
+
+    <color name="color_android_bg">#4087d2</color>
+    <color name="color_ios_bg">#cbdc4c</color>
+    <color name="color_rest_bg">#4fdad1</color>
+    <color name="color_front_bg">#d29824</color>
+    <color name="color_extent_bg">#bc5be6</color>
 </resources>
